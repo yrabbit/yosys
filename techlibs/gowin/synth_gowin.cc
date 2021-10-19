@@ -127,7 +127,6 @@ struct SynthGowinPass : public ScriptPass
 				nobram = true;
 				nolutram = true;
 				nowidelut = true;
-				noalu = true;
 				continue;
 			}
 			if (args[argidx] == "-run" && argidx+1 < args.size()) {
