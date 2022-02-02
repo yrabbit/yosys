@@ -584,6 +584,14 @@ module IOBUF (O, IO, I, OEN);
   assign I = IO;
 endmodule
 
+module TLVDS_OBUF (I, O, OB);
+  input I;
+  output O;
+  output OB;
+  assign O = I;
+  assign OB = ~I;
+endmodule
+
 module GSR (input GSRI);
 	wire GSRO = GSRI;
 endmodule
