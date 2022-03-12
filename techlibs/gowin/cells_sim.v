@@ -550,10 +550,6 @@ module GND(output G);
 	assign G = 0;
 endmodule
 
-(* blackbox *)
-module GSR(input);
-endmodule
-
 module IBUF(output O, input I);
 
 	specify
