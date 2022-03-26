@@ -615,6 +615,28 @@ module ODDRC(D0, D1, CLEAR, TX, CLK, Q0, Q1);
 	parameter INIT = 0;
 endmodule
 
+(* blackbox *)
+module OSC(output OSCOUT);
+	parameter FREQ_DIV = 100;
+	parameter DEVICE = "GW1N-4"; // "GW1N-4", "GW1N-9", "GW1NR-4", "GW1NR-9", 
+	                             // "GW1N-4B", "GW1NR-4B", "GW1NRF-4B", "GW1N-9C", "GW1NR-9C"
+endmodule
+
+(* blackbox *)
+module OSCH(output OSCOUT);
+	parameter FREQ_DIV = 100;
+endmodule
+
+(* blackbox *)
+module OSCZ(input OSCEN, output OSCOUT);
+	parameter FREQ_DIV = 100;
+endmodule
+
+(* blackbox *)
+module OSCF(input OSCEN, output OSCOUT, output OSCOUT30M);
+	parameter FREQ_DIV = 96;
+endmodule
+
 module GSR (input GSRI);
 	wire GSRO = GSRI;
 endmodule
