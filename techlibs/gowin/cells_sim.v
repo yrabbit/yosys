@@ -609,7 +609,7 @@ module OSER4(D3, D2, D1, D0, TX1, TX0, FCLK, PCLK, RESET, Q);
 	parameter HWL = "false";
 endmodule
 
-module OSER4(Q3, Q2, Q1, Q0, FCLK, PCLK,
+module IDES4(Q3, Q2, Q1, Q0, FCLK, PCLK,
 RESET, CALIB, D);
 	input D;
 	input FCLK;
@@ -617,18 +617,6 @@ RESET, CALIB, D);
 	input RESET;
 	input CALIB;
 
-	output Q15;
-	output Q14;
-	output Q13;
-	output Q12;
-	output Q11;
-	output Q10;
-	output Q9;
-	output Q8;
-	output Q7;
-	output Q6;
-	output Q5;
-	output Q4;
 	output Q3;
 	output Q2;
 	output Q1;
