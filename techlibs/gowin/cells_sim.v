@@ -592,7 +592,7 @@ endmodule
 
 module OSER16(Q15, Q14, Q13, Q12, Q11, Q10, 
 Q9, Q8, Q7, Q6, Q5, Q4, Q3, Q2, Q1, Q0, FCLK, PCLK,
-RESET, CALIB, D)
+RESET, CALIB, D);
 	input D;
 	input FCLK;
 	input PCLK;
