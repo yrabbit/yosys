@@ -590,7 +590,55 @@ module TLVDS_OBUF (I, O, OB);
   assign OB = ~I;
 endmodule
 
-module OSER16(Q15, Q14, Q13, Q12, Q11, Q10, 
+module OSER4(D3, D2, D1, D0, TX1, TX0, FCLK, PCLK, RESET, Q);
+	output Q;
+
+	input D3;
+	input D2;
+	input D1;
+	input D0;
+	input TX1;
+	input TX0;
+	input FCLK;
+	input PCLK;
+	input RESET;
+
+	parameter GSREN = "false";
+	parameter LSREN = "true";
+	parameter TXCLK_POL = 0;
+	parameter HWL = "false";
+endmodule
+
+module OSER4(Q3, Q2, Q1, Q0, FCLK, PCLK,
+RESET, CALIB, D);
+	input D;
+	input FCLK;
+	input PCLK;
+	input RESET;
+	input CALIB;
+
+	output Q15;
+	output Q14;
+	output Q13;
+	output Q12;
+	output Q11;
+	output Q10;
+	output Q9;
+	output Q8;
+	output Q7;
+	output Q6;
+	output Q5;
+	output Q4;
+	output Q3;
+	output Q2;
+	output Q1;
+	output Q0;
+
+	parameter GSREN = "false";
+	parameter LSREN = "true";
+endmodule
+
+module IDES16(Q15, Q14, Q13, Q12, Q11, Q10, 
 Q9, Q8, Q7, Q6, Q5, Q4, Q3, Q2, Q1, Q0, FCLK, PCLK,
 RESET, CALIB, D);
 	input D;
@@ -622,7 +670,7 @@ endmodule
 
 module OSER16(D15, D14, D13, D12, D11, D10, 
 D9, D8, D7, D6, D5, D4, D3, D2, D1, D0, FCLK, PCLK,
-RESET, Q)
+RESET, Q);
 	output Q;
 
 	input D15;
