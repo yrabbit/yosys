@@ -590,8 +590,9 @@ module TLVDS_OBUF (I, O, OB);
   assign OB = ~I;
 endmodule
 
-module OSER4(D3, D2, D1, D0, TX1, TX0, FCLK, PCLK, RESET, Q);
-	output Q;
+module OSER4(D3, D2, D1, D0, TX1, TX0, FCLK, PCLK, RESET, Q1, Q0);
+	output Q1;
+	output Q0;
 
 	input D3;
 	input D2;
