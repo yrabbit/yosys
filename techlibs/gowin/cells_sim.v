@@ -610,6 +610,31 @@ module OSER4(D3, D2, D1, D0, TX1, TX0, FCLK, PCLK, RESET, Q1, Q0);
 	parameter HWL = "false";
 endmodule
 
+module OSER8(D7, D6, D5, D4, D3, D2, D1, D0, TX3, TX2, TX1, TX0, FCLK, PCLK, RESET, Q1, Q0);
+	output Q1;
+	output Q0;
+
+	input D7;
+	input D6;
+	input D5;
+	input D4;
+	input D3;
+	input D2;
+	input D1;
+	input D0;
+	input TX3;
+	input TX2;
+	input TX1;
+	input TX0;
+	input FCLK;
+	input PCLK;
+	input RESET;
+
+	parameter GSREN = "false";
+	parameter LSREN = "true";
+	parameter TXCLK_POL = 0;
+	parameter HWL = "false";
+endmodule
 module IDES4(Q3, Q2, Q1, Q0, FCLK, PCLK,
 RESET, CALIB, D);
 	input D;
