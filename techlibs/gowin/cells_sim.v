@@ -635,6 +635,28 @@ module OSER8(D7, D6, D5, D4, D3, D2, D1, D0, TX3, TX2, TX1, TX0, FCLK, PCLK, RES
 	parameter TXCLK_POL = 0;
 	parameter HWL = "false";
 endmodule
+
+module OSER10(D9, D8, D7, D6, D5, D4, D3, D2, D1, D0, FCLK, PCLK, RESET, Q);
+	output Q;
+
+	input D9;
+	input D8;
+	input D7;
+	input D6;
+	input D5;
+	input D4;
+	input D3;
+	input D2;
+	input D1;
+	input D0;
+	input FCLK;
+	input PCLK;
+	input RESET;
+
+	parameter GSREN = "false";
+	parameter LSREN = "true";
+endmodule
+
 module IDES4(Q3, Q2, Q1, Q0, FCLK, PCLK,
 RESET, CALIB, D);
 	input D;
