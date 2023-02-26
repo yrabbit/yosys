@@ -1666,6 +1666,15 @@ input RESETA, RESETB;
 
 endmodule
 
+module CLKDIV(HCLKIN, RESETN, CALIB, CLKOUT);
+	input HCLKIN;
+	input RESETN;
+	input CALIB;
+	output CLKOUT;
+	parameter DIV_MODE = 2; // 2, 3.5, 4, 5 (8)
+	parameter GSREN = "false";
+endmodule
+
 
 (* blackbox *)
 module rPLL (CLKOUT, CLKOUTP, CLKOUTD, CLKOUTD3, LOCK, CLKIN, CLKFB, FBDSEL, IDSEL, ODSEL, DUTYDA, PSDA, FDLY, RESET, RESET_P);
