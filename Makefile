@@ -141,7 +141,7 @@ LDLIBS += -lrt
 endif
 endif
 
-YOSYS_VER := 0.26+53
+YOSYS_VER := 0.26+62
 
 # Note: We arrange for .gitcommit to contain the (short) commit hash in
 # tarballs generated with git-archive(1) using .gitattributes. The git repo
@@ -837,6 +837,9 @@ ABCOPT=""
 endif
 
 test: $(TARGETS) $(EXTRA_TARGETS)
+ifeq ($(ENABLE_VERIFIC),1)
+	+cd tests/verific && bash run-test.sh $(SEEDOPT)
+endif
 	+cd tests/simple && bash run-test.sh $(SEEDOPT)
 	+cd tests/simple_abc9 && bash run-test.sh $(SEEDOPT)
 	+cd tests/hana && bash run-test.sh $(SEEDOPT)
