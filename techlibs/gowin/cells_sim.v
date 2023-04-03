@@ -822,6 +822,26 @@ RESET, CALIB, D);
 	parameter GSREN = "false";
 	parameter LSREN = "true";
 endmodule
+
+module IDDR(D, CLK, Q0, Q1);
+	input D;
+	input CLK;
+	output Q0;
+	output Q1;
+	parameter Q0_INIT = 1'b0;
+	parameter Q1_INIT = 1'b0;
+endmodule
+
+module IDDRC(D, CLK, CLEAR, Q0, Q1);
+	input D;
+	input CLK;
+	input CLEAR;
+	output Q0;
+	output Q1;
+	parameter Q0_INIT = 1'b0;
+	parameter Q1_INIT = 1'b0;
+endmodule
+
 (* blackbox *)
 module ODDR(D0, D1, TX, CLK, Q0, Q1);
 	input D0;
@@ -1735,15 +1755,6 @@ input CEA, CEB;
 input OCEA, OCEB;
 input RESETA, RESETB;
 
-endmodule
-
-module CLKDIV(HCLKIN, RESETN, CALIB, CLKOUT);
-	input HCLKIN;
-	input RESETN;
-	input CALIB;
-	output CLKOUT;
-	parameter DIV_MODE = 2; // 2, 3.5, 4, 5 (8)
-	parameter GSREN = "false";
 endmodule
 
 
