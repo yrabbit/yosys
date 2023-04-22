@@ -1528,6 +1528,18 @@ input ERASE,PROG,NVSTR;
 input [31:0] DIN;
 output reg [31:0] DOUT;
 parameter IDLE    =  4'd0,
+          ERA_S1  =  4'd1,
+		  ERA_S2  =  4'd2,
+		  ERA_S3  =  4'd3,
+		  ERA_S4  =  4'd4,
+		  ERA_S5  =  4'd5,
+		  PRO_S1  =  4'd6,
+		  PRO_S2  =  4'd7,
+		  PRO_S3  =  4'd8,
+		  PRO_S4  =  4'd9,
+		  PRO_S5  =  4'd10,
+		  RD_S1   =  4'd11,
+		  RD_S2   =  4'd12;		  
 endmodule
 
 module FLASH608K (...);
@@ -1538,6 +1550,18 @@ input ERASE,PROG,NVSTR;
 input [31:0] DIN;
 output reg [31:0] DOUT;
 parameter IDLE    =  4'd0,
+          ERA_S1  =  4'd1,
+		  ERA_S2  =  4'd2,
+		  ERA_S3  =  4'd3,
+		  ERA_S4  =  4'd4,
+   		  ERA_S5  =  4'd5,
+		  PRO_S1  =  4'd6,
+		  PRO_S2  =  4'd7,
+		  PRO_S3  =  4'd8,
+		  PRO_S4  =  4'd9,
+		  PRO_S5  =  4'd10,
+		  RD_S1   =  4'd11,
+		  RD_S2   =  4'd12;
 endmodule
 
 module DCS (...);
@@ -1564,6 +1588,20 @@ input RESETN;
 output [31:0] DOUT;
 output TBIT;
 parameter IDLE  = 4'd0,
+          READ_S1 = 4'd1,
+          READ_S2 = 4'd2,
+          PROG_S1 = 4'd3,
+          PROG_S2 = 4'd4,
+          PROG_S3 = 4'd5,
+          PROG_S4 = 4'd6,
+          SERA_S1 = 4'd7,
+          SERA_S2 = 4'd8,
+          SERA_S3 = 4'd9,
+          SERA_S4 = 4'd10,
+          MASE_S1 = 4'd11,
+          MASE_S2 = 4'd12,
+          MASE_S3 = 4'd13,
+          MASE_S4 = 4'd14;
 endmodule
 
 module MCU (...);
@@ -1683,6 +1721,18 @@ input SLEEP;
 input [31:0] DIN;
 output reg [31:0] DOUT;
 parameter IDLE    =  4'd0,
+          ERA_S1  =  4'd1,
+		  ERA_S2  =  4'd2,
+		  ERA_S3  =  4'd3,
+		  ERA_S4  =  4'd4,
+		  ERA_S5  =  4'd5,
+		  PRO_S1  =  4'd6,
+		  PRO_S2  =  4'd7,
+		  PRO_S3  =  4'd8,
+		  PRO_S4  =  4'd9,
+		  PRO_S5  =  4'd10,
+		  RD_S1   =  4'd11,
+		  RD_S2   =  4'd12;		  
 endmodule
 
 module FLASH64KZ (...);
@@ -1693,6 +1743,18 @@ input ERASE,PROG,NVSTR;
 input [31:0] DIN;
 output reg [31:0] DOUT;
 parameter IDLE    =  4'd0,
+          ERA_S1  =  4'd1,
+		  ERA_S2  =  4'd2,
+		  ERA_S3  =  4'd3,
+		  ERA_S4  =  4'd4,
+		  ERA_S5  =  4'd5,
+		  PRO_S1  =  4'd6,
+		  PRO_S2  =  4'd7,
+		  PRO_S3  =  4'd8,
+		  PRO_S4  =  4'd9,
+		  PRO_S5  =  4'd10,
+		  RD_S1   =  4'd11,
+		  RD_S2   =  4'd12;		  
 endmodule
 
 module I3C (...);
@@ -1875,6 +1937,18 @@ input [31:0] DIN;
 input SLEEP;
 output reg [31:0] DOUT;
 parameter IDLE    =  4'd0,
+          ERA_S1  =  4'd1,
+		  ERA_S2  =  4'd2,
+		  ERA_S3  =  4'd3,
+		  ERA_S4  =  4'd4,
+		  ERA_S5  =  4'd5,
+		  PRO_S1  =  4'd6,
+		  PRO_S2  =  4'd7,
+		  PRO_S3  =  4'd8,
+		  PRO_S4  =  4'd9,
+		  PRO_S5  =  4'd10,
+		  RD_S1   =  4'd11,
+		  RD_S2   =  4'd12;		  
 endmodule
 
 module MIPI_DPHY_RX (...);
