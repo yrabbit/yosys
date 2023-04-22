@@ -12,6 +12,18 @@ class State(Enum):
     OUTSIDE = auto()
     IN_MODULE = auto()
 
+_skip = { 'ALU', 'DFF', 'DFFC', 'DFFCE', 'DFFE', 'DFFN', 'DFFNC', 'DFFNCE',
+          'DFFNE', 'DFFNP', 'DFFNPE', 'DFFNR', 'DFFNRE', 'DFFNS', 'DFFNSE',
+          'DFFP', 'DFFPE', 'DFFR', 'DFFRE', 'DFFS', 'DFFSE', 'DP', 'DPX9',
+          'ELVDS_OBUF', 'GND', 'GSR', 'IBUF', 'IDDR', 'IDDRC', 'IDES10',
+          'IDES16', 'IDES4', 'IDES8', 'IOBUF', 'IVIDEO', 'LUT1', 'LUT2',
+          'LUT3', 'LUT4', 'MUX2', 'MUX2_LUT5', 'MUX2_LUT6', 'MUX2_LUT7',
+          'MUX2_LUT8', 'OBUF', 'ODDR', 'ODDRC', 'OSC', 'OSCF', 'OSCH',
+          'OSCO', 'OSCW', 'OSCZ', 'OSER10', 'OSER16', 'OSER10', 'OSER4',
+          'OSER8', 'OVIDEO', 'PLLVR', 'RAM16S1', 'RAM16S2', 'RAM16S4',
+          'RAM16SDP1', 'RAM16SDP2', 'RAM16SDP4', 'rPLL', 'SDP',
+          'SDPX9', 'SP', 'SPX9', 'TBUF', 'TLVDS_OBUF', 'VCC'
+        }
 def xtract_cells_decl(dir, fout):
     fname = os.path.join(dir, 'prim_sim.v')
     with open(fname) as f:
@@ -20,7 +32,22 @@ def xtract_cells_decl(dir, fout):
             l, _, comment = l.partition('//')
             if l.startswith("module "):
                 cell_name = l[7:l.find('(')].strip()
-                print(cell_name)
+                if cell_name not in _skip:
+                    state = State.IN_MODULE
+                    fout.write(f'\nmodule {cell_name} (...);\n')
+            elif l.startswith(('input', 'output', 'inout')) and state == State.IN_MODULE:
+                fout.write(l)
+                if l[-1] != '\n':
+                    fout.write('\n')
+            elif l.startswith('parameter') and state == State.IN_MODULE:
+                fout.write(l)
+                if l[-1] != '\n':
+                    fout.write('\n')
+            elif l.startswith('endmodule') and state == State.IN_MODULE:
+                state = State.OUTSIDE
+                fout.write('endmodule\n')
+                if l[-1] != '\n':
+                    fout.write('\n')
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='Extract Gowin blackbox cell definitions.')
