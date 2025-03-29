@@ -114,12 +114,6 @@ BISON ?= bison
 STRIP ?= strip
 AWK ?= awk
 
-ifneq ($(shell :; command -v rsync),)
-RSYNC_CP ?= rsync -rc
-else
-RSYNC_CP ?= cp -ru
-endif
-
 ifeq ($(OS), Darwin)
 PLUGIN_LINKFLAGS += -undefined dynamic_lookup
 LINKFLAGS += -rdynamic
@@ -182,7 +176,7 @@ endif
 OBJS = kernel/version_$(GIT_REV).o
 
 bumpversion:
-	sed -i "/^YOSYS_VER := / s/+[0-9][0-9]*$$/+`git log --oneline c4b5190.. | wc -l`/;" Makefile
+#	sed -i "/^YOSYS_VER := / s/+[0-9][0-9]*$$/+`git log --oneline b5170e1.. | wc -l`/;" Makefile
 
 ABCMKARGS = CC="$(CXX)" CXX="$(CXX)" ABC_USE_LIBSTDCXX=1 ABC_USE_NAMESPACE=abc VERBOSE=$(Q)
 
@@ -592,9 +586,7 @@ $(eval $(call add_include_file,kernel/fmt.h))
 ifeq ($(ENABLE_ZLIB),1)
 $(eval $(call add_include_file,kernel/fstdata.h))
 endif
-$(eval $(call add_include_file,kernel/gzip.h))
 $(eval $(call add_include_file,kernel/hashlib.h))
-$(eval $(call add_include_file,kernel/io.h))
 $(eval $(call add_include_file,kernel/json.h))
 $(eval $(call add_include_file,kernel/log.h))
 $(eval $(call add_include_file,kernel/macc.h))
@@ -625,7 +617,7 @@ $(eval $(call add_include_file,frontends/ast/ast_binding.h))
 $(eval $(call add_include_file,frontends/blif/blifparse.h))
 $(eval $(call add_include_file,backends/rtlil/rtlil_backend.h))
 
-OBJS += kernel/driver.o kernel/register.o kernel/rtlil.o kernel/log.o kernel/calc.o kernel/yosys.o kernel/io.o kernel/gzip.o
+OBJS += kernel/driver.o kernel/register.o kernel/rtlil.o kernel/log.o kernel/calc.o kernel/yosys.o
 OBJS += kernel/binding.o kernel/tclapi.o
 OBJS += kernel/cellaigs.o kernel/celledges.o kernel/cost.o kernel/satgen.o kernel/scopeinfo.o kernel/qcsat.o kernel/mem.o kernel/ffmerge.o kernel/ff.o kernel/yw.o kernel/json.o kernel/fmt.o kernel/sexpr.o
 OBJS += kernel/drivertools.o kernel/functional.o
@@ -1013,13 +1005,13 @@ docs/source/cmd/abc.rst: $(TARGETS) $(EXTRA_TARGETS)
 	$(Q) mkdir -p docs/source/cmd
 	$(Q) mkdir -p temp/docs/source/cmd
 	$(Q) cd temp && ./../$(PROGRAM_PREFIX)yosys -p 'help -write-rst-command-reference-manual'
-	$(Q) $(RSYNC_CP) temp/docs/source/cmd docs/source
+	$(Q) rsync -rc temp/docs/source/cmd docs/source
 	$(Q) rm -rf temp
 docs/source/cell/word_add.rst: $(TARGETS) $(EXTRA_TARGETS)
 	$(Q) mkdir -p docs/source/cell
 	$(Q) mkdir -p temp/docs/source/cell
 	$(Q) cd temp && ./../$(PROGRAM_PREFIX)yosys -p 'help -write-rst-cells-manual'
-	$(Q) $(RSYNC_CP) temp/docs/source/cell docs/source
+	$(Q) rsync -rc temp/docs/source/cell docs/source
 	$(Q) rm -rf temp
 
 docs/source/generated/cells.json: docs/source/generated $(TARGETS) $(EXTRA_TARGETS)
@@ -1046,7 +1038,7 @@ docs/source/generated:
 
 # some commands return an error and print the usage text to stderr
 define DOC_USAGE_STDERR
-docs/source/generated/$(1): $(TARGETS) docs/source/generated FORCE
+docs/source/generated/$(1): $(TARGETS) docs/source/generated
 	-$(Q) ./$(PROGRAM_PREFIX)$(1) --help 2> $$@
 endef
 DOCS_USAGE_STDERR := yosys-config yosys-filterlib
@@ -1061,7 +1053,7 @@ $(foreach usage,$(DOCS_USAGE_STDERR),$(eval $(call DOC_USAGE_STDERR,$(usage))))
 # others print to stdout
 define DOC_USAGE_STDOUT
 docs/source/generated/$(1): $(TARGETS) docs/source/generated
-	$(Q) ./$(PROGRAM_PREFIX)$(1) --help > $$@ || rm $$@
+	$(Q) ./$(PROGRAM_PREFIX)$(1) --help > $$@
 endef
 DOCS_USAGE_STDOUT := yosys yosys-smtbmc yosys-witness
 $(foreach usage,$(DOCS_USAGE_STDOUT),$(eval $(call DOC_USAGE_STDOUT,$(usage))))
@@ -1197,8 +1189,6 @@ echo-cxx:
 -include backends/*/*.d
 -include kernel/*.d
 -include techlibs/*/*.d
-
-FORCE:
 
 .PHONY: all top-all abc test install install-abc docs clean mrproper qtcreator coverage vcxsrc
 .PHONY: config-clean config-clang config-gcc config-gcc-static config-gprof config-sudo

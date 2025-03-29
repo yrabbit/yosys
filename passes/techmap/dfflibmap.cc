@@ -19,7 +19,6 @@
 
 #include "kernel/yosys.h"
 #include "kernel/sigtools.h"
-#include "kernel/gzip.h"
 #include "libparse.h"
 #include <string.h>
 #include <errno.h>
@@ -631,12 +630,13 @@ struct DfflibmapPass : public Pass {
 
 		LibertyMergedCells merged;
 		for (auto path : liberty_files) {
-			std::istream* f = uncompressed(path);
-			if (f->fail())
+			std::ifstream f;
+			f.open(path.c_str());
+			if (f.fail())
 				log_cmd_error("Can't open liberty file `%s': %s\n", path.c_str(), strerror(errno));
-			LibertyParser p(*f);
+			LibertyParser p(f);
 			merged.merge(p);
-			delete f;
+			f.close();
 		}
 
 		find_cell(merged.cells, ID($_DFF_N_), false, false, false, false, false, false, dont_use_cells);

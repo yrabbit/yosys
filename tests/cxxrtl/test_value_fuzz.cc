@@ -241,10 +241,7 @@ struct CtlzTest
 	{
 		if (a == 0)
 			return bits;
-		if (sizeof(long) == 4)
-			return __builtin_clzll(a) - (64 - bits);
-		else
-			return __builtin_clzl(a) - (64 - bits);
+		return __builtin_clzl(a) - (64 - bits);
 	}
 
 	template<size_t Bits>

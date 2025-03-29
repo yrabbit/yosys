@@ -1005,7 +1005,7 @@ always @* begin
 			C = I0;
 		end
 		MULT: begin
-			S = (I0 & I1) ^ I3;
+			S = I0 & I1;
 			C = I0 & I1;
 		end
 	endcase

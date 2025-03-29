@@ -4723,10 +4723,7 @@ if(gzread_pass_status)
                                 hdr_incomplete = (xc->start_time == 0) && (xc->end_time == 0);
 
                                 fstFread(&dcheck, 8, 1, xc->f);
-				/*
-				 * Yosys patch: Fix double endian check for i386 targets built in modern gcc
-				 */
-                                xc->double_endian_match = (dcheck == (double)FST_DOUBLE_ENDTEST);
+                                xc->double_endian_match = (dcheck == FST_DOUBLE_ENDTEST);
                                 if(!xc->double_endian_match)
                                         {
                                         union   {

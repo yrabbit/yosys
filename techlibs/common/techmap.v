@@ -290,7 +290,7 @@ module _90_alu (A, B, CI, BI, X, Y, CO);
 endmodule
 
 (* techmap_maccmap *)
-(* techmap_celltype = "$macc $macc_v2" *)
+(* techmap_celltype = "$macc" *)
 module _90_macc;
 endmodule
 

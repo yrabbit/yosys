@@ -23,7 +23,6 @@
 #include "kernel/celltypes.h"
 #include "passes/techmap/libparse.h"
 #include "kernel/cost.h"
-#include "kernel/gzip.h"
 #include "libs/json11/json11.hpp"
 
 USING_YOSYS_NAMESPACE
@@ -348,12 +347,13 @@ statdata_t hierarchy_worker(std::map<RTLIL::IdString, statdata_t> &mod_stat, RTL
 
 void read_liberty_cellarea(dict<IdString, cell_area_t> &cell_area, string liberty_file)
 {
-	std::istream* f = uncompressed(liberty_file.c_str());
+	std::ifstream f;
+	f.open(liberty_file.c_str());
 	yosys_input_files.insert(liberty_file);
-	if (f->fail())
+	if (f.fail())
 		log_cmd_error("Can't open liberty file `%s': %s\n", liberty_file.c_str(), strerror(errno));
-	LibertyParser libparser(*f);
-	delete f;
+	LibertyParser libparser(f);
+	f.close();
 
 	for (auto cell : libparser.ast->children)
 	{

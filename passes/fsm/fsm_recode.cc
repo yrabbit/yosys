@@ -22,7 +22,6 @@
 #include "kernel/sigtools.h"
 #include "kernel/consteval.h"
 #include "kernel/celltypes.h"
-#include "kernel/utils.h"
 #include "fsmdata.h"
 #include <math.h>
 #include <string.h>

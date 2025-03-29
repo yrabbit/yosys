@@ -738,8 +738,6 @@ public:
 	bool empty() const;
 	void bitvectorize() const;
 
-	void append(const RTLIL::Const &other);
-
 	class const_iterator {
 	private:
 		const Const& parent;
