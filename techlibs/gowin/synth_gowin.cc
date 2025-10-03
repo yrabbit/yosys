@@ -197,6 +197,10 @@ struct SynthGowinPass : public ScriptPass
 		}
 		extra_args(args, argidx, design);
 
+		if (family == "gw5a") {
+			noluram = true;
+		}
+
 		if (!design->full_selection())
 			log_cmd_error("This command only operates on fully selected designs!\n");
 
